@@ -1,11 +1,13 @@
-# from django.shortcuts import render
-# from django.views import View 
+from django.shortcuts import render, redirect
+from django.views import View 
 from django.views.generic.base import TemplateView
 from .models import Post
 
 from django.views.generic import  DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 # from django.http import HttpResponse
 
 
@@ -56,3 +58,22 @@ class PostCreate(CreateView):
 
     def get_succes_url(self):
         return reverse('post_detail', kwargs = {'pk':self.object.pk})
+
+
+
+class SignUp(View):
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form }
+        return render(request, "registration/signup.html", context)
+
+    def post(self, request):
+        form = UserCreationForm(request.Post)
+        if form.is_valid():
+            user= form.save()
+            login(request, user)
+            return redirect("profile")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)
+
