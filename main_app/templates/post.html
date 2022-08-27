@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Posts</h1>
+<h1 class="title">{{header}}</h1>
+
+
+
+<!-- this a shearch form if I want to add it  -->
+
+<!-- <form class="mb-5" method="get">
+    <div class="field has-addons">
+        <div class="control"> -->
+            <!--  Our input will search by name of card  -->
+            <!-- <input class="input" type="text" name="title" placeholder="title" />
+        </div>
+        <div class="control">
+            <input class="button is-success" type="submit" value="Search" />
+        </div>
+    </div> -->
+    <!--  This anchor tag will redirect back to card list without a query param -->
+    <!-- <a class="button is-dark" href="{% url 'post' %}">Clear Search</a>
+</form> -->
+
+
+<div class="gallery">
+    {% for post in posts %}
+    <a href="{% url 'post_detail' post.pk %}">
+        <div class="card">
+            <!-- <div class="card-image">
+                <figure class="image is-square">
+                    <img src="{{post.img}}" alt="{{post.title}}" />
+                </figure>
+            </div> -->
+            <div class="card-header">
+                <h2 class="card-header-title">{{post.title}}</h2>
+            </div>
+            <div class="card-body">
+                <p>{{ post.body }}</p>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
