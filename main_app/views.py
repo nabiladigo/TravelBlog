@@ -17,6 +17,9 @@ from django.contrib.auth.forms import UserCreationForm
 class PostList(TemplateView):
    
     template_name = "post.html"
+    # using the id to show the new post first
+    ordering = ['-public_date' ]
+
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         name= self.request.GET.get("name")
@@ -34,6 +37,7 @@ class PostList(TemplateView):
 class PostDetail(DetailView):
     model= Post
     template_name = "post_detail.html"
+
 
 
 class PostUpdate(UpdateView):
@@ -57,7 +61,7 @@ class PostCreate(CreateView):
     template_name = "post_create.html"
 
     def get_succes_url(self):
-        return reverse('post_detail', kwargs = {'pk':self.object.pk})
+        return reverse('post_detail', kwargs={'pk':self.object.pk})
 
 
 

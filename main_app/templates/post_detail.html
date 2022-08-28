@@ -2,7 +2,9 @@
 {% extends 'base.html' %}
 {% block content %}
  
- {{ post.title }} || {{ post.author }}<br/>
+ {{ post.title }} <br/>
+ By:  {{ post.author }} ||
+ {{ post.public_date }} <br/>
  
 
  <div class="detail__container">
@@ -19,9 +21,10 @@
         </a>
      </div>
      <div class="detail__about">
-        <!-- <button>update</button> -->
+    
         <p>{{ post.body }}</p>
      </div>
+     <a class="button" href="{% url 'post'  %}">back</a>
  </div>
 
 {% endblock%}
