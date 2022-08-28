@@ -2,24 +2,30 @@
 {% extends 'base.html' %}
 {% block content %}
  
- {{ post.title }} <br/>
+{{user.id }}<br/>
+{{ post.author.id }} <br/>
+
+ {{ post.title }} || {{ post.author.id }}<br/>
  By:  {{ post.author }} ||
  {{ post.public_date }} <br/>
  
-
  <div class="detail__container">
-     <div class="button">
-        <a href="{% url 'post_update' post.pk %}" class="button is-info">
-            <span class="icon">
-                <i class="fas fa-edit"></i>
-            </span>
-        </a>
-        <a href="{% url 'post_delete' post.pk %}" class="button is-danger">
-            <span class="icon">
-                <i class="fas fa-trash-alt"></i>
-            </span>
-        </a>
-     </div>
+     {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+            <div class="button">
+                <a href="{% url 'post_update' post.pk %}" class="button is-info">
+                    <span class="icon">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                </a>
+                <a href="{% url 'post_delete' post.pk %}" class="button is-danger">
+                    <span class="icon">
+                        <i class="fas fa-trash-alt"></i>
+                    </span>
+                </a>
+            </div>
+        {% endif %}    
+     {% endif %}
      <div class="detail__about">
     
         <p>{{ post.body }}</p>
