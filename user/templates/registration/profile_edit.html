@@ -5,7 +5,7 @@
 <div class=" form-group">
     <form method="post">
         {% csrf_token %} 
-        {{ form.as_p }}
+        {{ form.as_table }}
         <button  class="is-secondary" >Update Profile </button>
     
     </form>

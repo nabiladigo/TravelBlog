@@ -26,6 +26,7 @@
         </div>
         <div class="navbar-menu navbar-end">
 
+            <a class="nav-link" href="/" >Home</a>
             {% if user.is_authenticated %}
                 <a class="nav-link" href="{% url 'post_create' %}" >Add Post</a>
                 <a class="nav-link" href="{% url 'profile_edit' %}" >Update Profile</a>
@@ -33,7 +34,7 @@
             {% else %}
                 <a class="navbar-item" href="/posts">Posts</a>
                 <a class="navbar-item" href="{% url 'signup' %}">join us </a>
-                <a class="navbar-item" href= >Login</a>
+                <a class="navbar-item" href="{% url 'login' %}">Login</a>
             {% endif %}
             
         </div>

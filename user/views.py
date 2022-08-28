@@ -12,11 +12,17 @@ class SignUp(generic.CreateView):
     template_name= "registration/signup.html"
     success_url = reverse_lazy('login')
 
+def profile(request):
+    return render(request, 'registration/profile.html')
 
+    
 class ProfileEdit(generic.CreateView):
     form_class = UserChangeForm
     template_name= "registration/profile_edit.html"
     success_url = reverse_lazy('post')
+
+    def get_object(self):
+        return self.request.user
 
 
 

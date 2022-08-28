@@ -128,4 +128,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL ='/posts'
-LOGOUT_REDIRECT_URL ='/posts'
+LOGOUT_REDIRECT_URL ='home'
