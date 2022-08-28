@@ -2,10 +2,8 @@
 {% extends 'base.html' %}
 {% block content %}
  
-{{user.id }}<br/>
-{{ post.author.id }} <br/>
 
- {{ post.title }} || {{ post.author.id }}<br/>
+ {{ post.title }} <br/>
  By:  {{ post.author }} ||
  {{ post.public_date }} <br/>
  
@@ -31,6 +29,26 @@
         <p>{{ post.body }}</p>
      </div>
      <a class="button" href="{% url 'post'  %}">back</a>
+
+
+     <br/><br/>
+     <hr>
+     <br/>
+
+     <form action="{% url 'post_like' post.pk %}" method="POST">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+            {% if liked  %}
+                <button class="button is-danger is-small  " type="submit" name="post_id" value="{{post.id}}">Unlike</button>
+            {% else %}
+                <button class="button is-info is-small  " type="submit" name="post_id" value="{{post.id}}">Like</button>
+
+            {% endif %}
+        {% else%}
+        <small><a href="{% url 'login' %}">log in </a>to like </small>
+        {% endif %}
+        - {{ total_likes }} likes
+     </form>
  </div>
 
 {% endblock%}

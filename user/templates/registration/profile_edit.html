@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 >Update Profile</h1>
+<div class=" form-group">
+    <form method="post">
+        {% csrf_token %} 
+        {{ form.as_p }}
+        <button  class="is-secondary" >Update Profile </button>
+    
+    </form>
+    
+</div>
+
+
+{% endblock%}

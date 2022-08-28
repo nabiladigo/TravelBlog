@@ -1,14 +1,14 @@
-from django.shortcuts import render, redirect
-from django.views import View 
+
+from django.shortcuts import render, get_object_or_404
+# from django.views import View 
 from django.views.generic.base import TemplateView
 from .models import Post
 
 from django.views.generic import  DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse
-# from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
-# from django.http import HttpResponse
+
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -38,6 +38,22 @@ class PostDetail(DetailView):
     model= Post
     template_name = "post_detail.html"
 
+    def get_context_data(self, **kwargs):
+        context= super(PostDetail, self).get_context_data( **kwargs)
+
+        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
+
+        liked=False
+        if stuff.likes.filter(id=self.request.user.id).exists():
+            liked=True
+
+        context["total_likes"]= total_likes
+        context["liked"]= liked
+
+
+        return  context
+
 
 
 class PostUpdate(UpdateView):
@@ -60,24 +76,23 @@ class PostCreate(CreateView):
     fields =['title', 'author', 'body']
     template_name = "post_create.html"
 
-    # def get_succes_url(self):
-    #     return redirect('post_detail', kwargs={'pk':self.object.pk})
+
+
+def PostLike(request, pk):
+    post= get_object_or_404(Post, id=request.POST.get('post_id'))
+    liked=False
+    if post.likes.filter(id=request.user.id).exists():
+        post.likes.remove(request.user)
+        liked=False
+    else:
+        post.likes.add(request.user)
+        liked= True
+
+    # to stay in the same page without the user notice anything
+    return HttpResponseRedirect(reverse('post_detail', args=[str(pk)]))
 
 
 
-# class SignUp(View):
-#     def get(self, request):
-#         form = UserCreationForm()
-#         context = {"form": form }
-#         return render(request, "registration/signup.html", context)
 
-#     def post(self, request):
-#         form = UserCreationForm(request.Post)
-#         if form.is_valid():
-#             user= form.save()
-#             login(request, user)
-#             return redirect("profile")
-#         else:
-#             context = {"form": form}
-#             return render(request, "registration/signup.html", context)
+
 
