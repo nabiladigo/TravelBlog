@@ -3,7 +3,7 @@ from django.views import generic, View
 
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.urls import reverse_lazy
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -12,6 +12,8 @@ class SignUp(generic.CreateView):
     template_name= "registration/signup.html"
     success_url = reverse_lazy('login')
 
+
+@login_required
 def profile(request):
     return render(request, 'registration/profile.html')
 
