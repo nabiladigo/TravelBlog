@@ -1,55 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div>
 
-<h1 class="title">Posts</h1>
+    <h1 class="title">Posts</h1>
+    
 
-
-
-<!-- this a shearch form if I want to add it  -->
-
-<!-- <form class="mb-5" method="get">
-    <div class="field has-addons">
-        <div class="control"> -->
-            <!--  Our input will search by name of card  -->
-            <!-- <input class="input" type="text" name="title" placeholder="title" />
-        </div>
-        <div class="control">
-            <input class="button is-success" type="submit" value="Search" />
-        </div>
-    </div> -->
-    <!--  This anchor tag will redirect back to card list without a query param -->
-    <!-- <a class="button is-dark" href="{% url 'post' %}">Clear Search</a>
-</form> -->
-
-
-<div class="gallery">
-    {% for post in posts %}
-    <a href="{% url 'post_detail' post.pk %}">
-        <div class="card">
-            <!-- <div class="card-image">
-                <figure class="image is-square">
-                    <img src="{{post.img}}" alt="{{post.title}}" />
-                </figure>
-            </div> -->
-            <div class="card-header">
-               <h1 class="card-header-title">{{post.title}} </h1> 
-                {{post.author}} - {{post.public_date}}
-
-
+    <!-- this a shearch form if I want to add it  -->
+    
+    <!-- <form class="mb-5" method="get">
+        <div class="field has-addons">
+            <div class="control"> -->
+                <!--  Our input will search by name of card  -->
+                <!-- <input class="input" type="text" name="title" placeholder="title" />
             </div>
-        </div>
-    </a>
-    <div class="card-body">
-        <p>{{ post.body }}</p>
+            <div class="control">
+                <input class="button is-success" type="submit" value="Search" />
+            </div>
+        </div> -->
+        <!--  This anchor tag will redirect back to card list without a query param -->
+        <!-- <a class="button is-dark" href="{% url 'post' %}">Clear Search</a>
+    </form> -->
+    
+    <hr>
+    <hr>
+    
+    <div>
+        <ul>
+            <li> New Photos</li>
+            <li> New Blogers</li>
+        </ul>
     </div>
-    {% endfor %}
+    
+    <hr>
+
+    
+    <div class="gallery">
+        {% for post in posts %}
+        <a href="{% url 'post_detail' post.pk %}">
+            <div class="card">
+                <!-- <div class="card-image">
+                    <figure class="image is-square">
+                        <img src="{{post.img}}" alt="{{post.title}}" />
+                    </figure>
+                </div> -->
+                <div class="card-header">
+                   <h1 class="card-header-title">{{post.title}} </h1> 
+                    {{post.author}} - {{post.public_date}}
+    
+    
+                </div>
+            </div>
+        </a>
+        <div class="card-body">
+            <p>{{ post.body | ":200" }}</p>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 
-<div class="footer">
-    {% extends 'footer.html' %}
-</div>
 
 
 {% endblock %}

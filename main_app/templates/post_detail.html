@@ -27,6 +27,8 @@
      <div class="detail__about">
     
         <p>{{ post.body }}</p>
+        <!-- if you ant to add html to your post but it wouldnt be safe you might get hacked 
+        <p>{{ post.body | safe }}</p> -->
      </div>
      <a class="button" href="{% url 'post'  %}">back</a>
 
@@ -52,9 +54,5 @@
  </div>
 
 
-<div class="footer">
-    {% extends 'footer.html' %}
-</div>
-
-
+ 
 {% endblock%}

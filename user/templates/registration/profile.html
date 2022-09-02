@@ -2,36 +2,56 @@
 {% block title %} Profile Page{% endblock title %}
 {% block content %}
 <div class="row my-3 p-3">
-    <h1> profile page {{profile.username }}</h1>
+    <h1> profile page {{user.username }}</h1>
     <div class="">
         <div class="">
-            <img class=""href="{{ profile.avatar }}"/>
-            <h1> {{ profile.user }}</h1>
+            <img class="" href="{{ user.avatar }}"/>
+            <!-- <h1> {{ user.user }}</h1> -->
         </div>
         <div class="">
             <ul>
                 <li class="">
-                    Posts
+                    <a class="" href="/">Posts</a>
                 </li>
                 <li class="" >
-                    <a class="" href="{{ profile.bio }}">about</a>
+                    <a class="" href="{{ user.bio }}">about</a>
                 </li>
                 <li class="" >
                     Photos
                 </li>
                 <li class="">
-                    Edit
+                    <a class="" href="{% url 'profile_edit' %}">Edit</a>
                 </li>
+                <li>
+                    <a class="" href="{% url 'post_create' %}">Add a Post</a>                </li>
 
             </ul>
         </div>
     </div>
-
 </div>
+    <div class="" >
+        {% for post in posts %}
+        <a href="{% url 'post_detail' post.pk %}">
+            <div class="card">
+                <!-- <div class="card-image">
+                        <figure class="image is-square">
+                            <img src="{{post.img}}" alt="{{post.title}}" />
+                        </figure>
+                    </div> -->
+                <div class="card-header">
+                    <h1 class="card-header-title">{{post.title}} </h1>
+                    {{post.author}} - {{post.public_date}}
+        
+        
+                </div>
+            </div>
+        </a>
+        <div class="card-body">
+            <p>{{ post.body }}</p>
+        </div>
+        {% endfor %}
+    </div>
 
-<div class="footer">
-    {% extends 'footer.html' %}
-</div>
 
 
 {% endblock content %}
