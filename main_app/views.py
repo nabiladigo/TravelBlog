@@ -18,16 +18,17 @@ from django.http import HttpResponseRedirect
 class PostList(TemplateView):
    
     template_name = "post.html"
+    
     # using the id to show the new post first
     ordering = ['-public_date' ]
 
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
-        name= self.request.GET.get("name")
+        title= self.request.GET.get("title")
 
-        if name != None:
-            context["posts"] = Post.objects.filter(name_icontains=name)
-            context["header"]= f"Searching for {name}"
+        if title != None:
+            context["posts"] = Post.objects.filter(name_icontains=title)
+            context["header"]= f"Searching for {title}"
         else:
             context["posts"] = Post.objects.all()
             context["header"] = "posts"

@@ -1,4 +1,5 @@
 from audioop import reverse
+from email.mime import image
 from django.db import models
 from django.contrib.auth.models import User
 from datetime  import datetime, date
@@ -7,6 +8,7 @@ from django.urls import reverse
 # Create your models here.
 
 class Post(models.Model):
+    image = models.CharField(max_length=250)
     title = models.CharField(max_length=255)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     body= models.TextField()
