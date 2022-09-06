@@ -91,11 +91,11 @@
         {% for post in posts %}
         <a href="{% url 'post_detail' post.pk %}">
             <div class="card">
-                <!-- <div class="card-image">
+                <div class="card-image">
                     <figure class="image is-square">
                         <img src="{{post.img}}" alt="{{post.title}}" />
                     </figure>
-                </div> -->
+                </div>
                 <div class="card-header">
                    <h1 class="card-header-title">{{post.title}} </h1> 
                     {{post.author}} - {{post.public_date}}

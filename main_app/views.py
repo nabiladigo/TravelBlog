@@ -60,7 +60,7 @@ class PostDetail(DetailView):
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'author', 'body']
+    fields = ['image','title', 'author', 'body']
     template_name = "post_update.html"
 
     def get_success_url(self):
