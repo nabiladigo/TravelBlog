@@ -77,6 +77,14 @@ class PostCreate(CreateView):
     fields =['title', 'author', 'body']
     template_name = "post_create.html"
 
+    def form_valid(self, form):
+        form.instance.user= self.request.user
+        return super(PostCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        print(self.kwargs)
+        return reverse('post_detail', kwargs={'pk': self.object.pk})
+
 
 
 def PostLike(request, pk):
