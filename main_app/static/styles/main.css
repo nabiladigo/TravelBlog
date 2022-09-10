@@ -1,0 +1,14 @@
+.header{
+    height: 700px;
+    width: 100%;
+    background-image: url('https: //i.imgur.com/HJrdFTp.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-size:; */
+    }
+.header h1{
+    font-size: 40px;
+    font-weight: 700;
+    color:black;
+    margin-top:235px;
+}

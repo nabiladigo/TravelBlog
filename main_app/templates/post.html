@@ -10,7 +10,7 @@
 
     <h2>I want to add a map here </h2>
 
-    <div class="tb-center hidden-xs" style="width:320px;max-width:100%;overflow:hidden;">
+    <!-- <div class="tb-center hidden-xs" style="width:320px;max-width:100%;overflow:hidden;">
         <img name="small_world" id="small_world" src="/pix/small_world.png" usemap="#m_small_world" alt="">
             <map name="m_small_world">
                 <area shape="poly" 
@@ -58,7 +58,7 @@
                     title="Asia" 
                     alt="Asia">
             </map>
-    </div>
+    </div> -->
     <br />
     <hr>
     <hr>
@@ -75,8 +75,8 @@
     
     <div class="gallery">
         {% for post in posts %}
-        <a href="{% url 'post_detail' post.pk %}">
-            <div class="card">
+        <div class="card" style="width:18rem;">
+            <a href="{% url 'post_detail' post.pk %}">
                 <div class="card-image">
                     <figure class="image is-square">
                         <img src="{{post.img}}" alt="{{post.title}}" />
@@ -88,11 +88,11 @@
     
     
                 </div>
+            </a>
+            <div class="card-body">
+                <p>{{ post.body }}</p>
+                    <!-- | " : 200"  -->
             </div>
-        </a>
-        <div class="card-body">
-            <p>{{ post.body }}</p>
-                <!-- | " : 200"  -->
         </div>
         {% endfor %}
     </div>
