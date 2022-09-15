@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.views import generic, View
 
+from .models import Profile
+
+from django.views.generic import  DetailView
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.urls import reverse_lazy
+
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
@@ -28,3 +32,10 @@ class ProfileEdit(generic.CreateView):
 
 
 
+class ProfilePage(DetailView):
+    model = Profile
+    template_name = "profile.html"
+    def get_context_data(self, **kwargs):
+        context = super(ProfilePage, self).get_context_data(**kwargs)
+        # context['guide'] = Guide.objects.filter(user=self.request.user)
+        return context
